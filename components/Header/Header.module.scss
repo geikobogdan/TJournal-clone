@@ -1,10 +1,10 @@
 .root {
   position: fixed;
-  width: 100%;
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
-  background-color: #fff4e2 !important ;
+  background-color: #fff4e2 !important;
   padding: 0 35px 0 10px;
   height: 60px;
   margin-bottom: 14px;
@@ -20,7 +20,7 @@
 
 .avatar {
   margin-left: 15px;
-  border-radius: 20% !important ;
+  border-radius: 20% !important;
   margin-right: 6px;
 }
 
@@ -45,16 +45,17 @@
 
   input {
     width: 100%;
-    height: 38px;
+    height: 40px;
     border: 0;
     border-radius: 10px;
-    bottom: 0;
     background-color: rgba(0, 0, 0, 0.05);
     font-size: 16px;
     padding-left: 40px;
     transition: all 0.1s ease-in-out;
     border: 1px solid transparent;
-    &:hover {
+
+    &:hover,
+    &:focus {
       background-color: #fff;
       border-color: darken(#fff4e2, 15%);
       box-shadow: 0 0 0 3px rgb(229 160 64 / 12%);

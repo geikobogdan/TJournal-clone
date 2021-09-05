@@ -1,16 +1,15 @@
 .menu {
-  position: fixed;
   width: 200px;
-  left: 15px;
-  top: 70px;
-  
+  position: sticky;
+  top: 80px;
+
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
 
     li {
-      margin-bottom: 2px;
+      margin-bottom: 4px;
 
       button {
         width: 100%;
@@ -20,6 +19,12 @@
         text-transform: inherit;
         font-size: 16px;
         font-weight: 400;
+        box-shadow: none;
+
+        span[class*='MuiButton-label'] {
+          display: flex;
+          align-items: center;
+        }
 
         svg {
           margin-right: 10px;
