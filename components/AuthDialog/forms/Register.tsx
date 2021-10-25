@@ -8,6 +8,8 @@ import { UserApi } from "../../../utils/api";
 import { CreateUserDto } from "../../../utils/api/types";
 import { setCookie } from "nookies";
 import Alert from "@material-ui/lab/Alert";
+import { useAppDispatch } from "../../../redux/hooks";
+import { setUserData } from "../../../redux/slices/user";
 
 interface RegisterFormProps {
   onOpenRegister: () => void;
@@ -18,6 +20,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
   onOpenRegister,
   onOpenLogin,
 }) => {
+  const dispatch = useAppDispatch();
   const [errorMessage, setErrorMessage] = useState("");
   const form = useForm({
     mode: "onChange",
@@ -32,6 +35,7 @@ export const RegisterForm: React.FC<RegisterFormProps> = ({
         path: "/",
       });
       setErrorMessage("");
+      dispatch(setUserData(data));
     } catch (error) {
       console.warn("Register error", error);
       if (error.response) {
