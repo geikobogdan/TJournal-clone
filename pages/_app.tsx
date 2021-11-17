@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import Head from "next/head";
 
 import { Header } from "../components/Header";
@@ -7,11 +8,10 @@ import { theme } from "../theme";
 
 import "../styles/globals.scss";
 import "macro-css";
-import { Provider } from "react-redux";
-import { store } from "../redux/store";
+import { wrapper } from "../redux/store";
 import { AppProps } from "next/dist/shared/lib/router/router";
 
-function MyApp({ Component, pageProps }: AppProps) {
+function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
@@ -26,17 +26,15 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,400;1,500;1,700;1,900&display=swap"
           rel="stylesheet"
-        ></link>
+        />
       </Head>
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
-        <Provider store={store}>
-          <Header />
-          <Component {...pageProps} />
-        </Provider>
+        <Header />
+        <Component {...pageProps} />
       </MuiThemeProvider>
     </>
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(App);
