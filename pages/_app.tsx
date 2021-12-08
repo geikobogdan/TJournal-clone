@@ -1,15 +1,15 @@
 /* eslint-disable @next/next/no-page-custom-font */
 import Head from "next/head";
-
 import { Header } from "../components/Header";
-
 import { MuiThemeProvider, CssBaseline } from "@material-ui/core";
 import { theme } from "../theme";
-
 import "../styles/globals.scss";
 import "macro-css";
 import { wrapper } from "../redux/store";
 import { AppProps } from "next/dist/shared/lib/router/router";
+import { parseCookies } from "nookies";
+import { setUserData } from "../redux/slices/user";
+import { Api } from "../utils/api";
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -36,5 +36,31 @@ function App({ Component, pageProps }: AppProps) {
     </>
   );
 }
+
+App.getInitialProps = wrapper.getInitialAppProps(
+  (store) =>
+    async ({ ctx, Component }) => {
+      try {
+        const userData = await Api(ctx).user.getMe();
+        store.dispatch(setUserData(userData));
+      } catch (error) {
+        if (ctx.asPath === "/write") {
+          ctx.res.writeHead(302, {
+            Location: "/403",
+          });
+          ctx.res.end();
+        }
+        console.log(error);
+      } finally {
+        return {
+          pageProps: {
+            ...(Component.getInitialProps
+              ? await Component.getInitialProps({ ...ctx, store })
+              : {}),
+          },
+        };
+      }
+    }
+);
 
 export default wrapper.withRedux(App);

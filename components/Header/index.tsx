@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { Paper, Button, IconButton, Avatar } from "@material-ui/core";
 import {
@@ -27,6 +27,12 @@ export const Header: React.FC = () => {
   const closeAuthDialog = () => {
     setAuthVisible(false);
   };
+
+  useEffect(() => {
+    if (authVisible && userData) {
+      closeAuthDialog();
+    }
+  }, [authVisible, userData]);
 
   return (
     <Paper classes={{ root: styles.root }} elevation={0}>
