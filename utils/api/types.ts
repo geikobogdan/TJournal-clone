@@ -9,13 +9,23 @@ export type CreateUserDto = {
   fullName: string;
 } & LoginDto;
 
+export type SearchPostDto = {
+  title?: string;
+  body?: string;
+  views?: "DESC" | "ASC";
+  limit?: number;
+  take?: number;
+  tag?: string;
+};
+
 export type ResponseUser = {
-  createdAt: string;
+  createdAt?: string;
   email: string;
   fullName: string;
+  commentsCount?: number;
   id: number;
   token: string;
-  updatedAt: string;
+  updatedAt?: string;
 };
 
 export type PostItem = {
@@ -25,6 +35,15 @@ export type PostItem = {
   tags: null | string;
   id: number;
   views: number;
+  user: ResponseUser;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CommentItem = {
+  id: number;
+  post: PostItem;
+  text: string;
   user: ResponseUser;
   createdAt: string;
   updatedAt: string;

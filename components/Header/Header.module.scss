@@ -31,6 +31,11 @@
   letter-spacing: 0 !important;
 }
 
+.searchBlockPopup {
+  position: absolute !important;
+  top: 40px;
+  width: 310px;
+}
 .searchBlock {
   position: relative;
   margin-right: 15px;
@@ -70,7 +75,7 @@
   cursor: pointer;
   font-weight: 500;
   margin-left: 15px;
-  
+
   svg {
     margin-right: 10px;
   }

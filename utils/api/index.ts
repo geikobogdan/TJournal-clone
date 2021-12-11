@@ -1,3 +1,4 @@
+import { CommentApi } from "./comment";
 import { PostApi } from "./post";
 import Cookies, { parseCookies } from "nookies";
 import axios from "axios";
@@ -7,6 +8,7 @@ import { UserApi } from "./user";
 export type ApiReturnType = {
   user: ReturnType<typeof UserApi>;
   post: ReturnType<typeof PostApi>;
+  comment: ReturnType<typeof CommentApi>;
 };
 
 export const Api = (
@@ -21,9 +23,14 @@ export const Api = (
       Authorization: "Bearer " + token,
     },
   });
-
-  return {
-    user: UserApi(instance),
-    post: PostApi(instance),
+  const apies = {
+    user: UserApi,
+    post: PostApi,
+    comment: CommentApi,
   };
+
+  const result = Object.entries(apies).reduce((prev, [key, f]) => {
+    return { ...prev, [key]: f(instance) };
+  }, {} as ApiReturnType);
+  return result;
 };
